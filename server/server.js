@@ -1,6 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { readDb, writeDb } from './db.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../dist');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -244,6 +251,19 @@ app.post('/api/readiness-check', (req, res) => {
     audit: auditRecord
   });
 });
+
+// Serve static frontend assets from dist in production
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+
+  // Catch-all route to serve index.html for SPA routes
+  app.get('*', (req, res, next) => {
+    if (req.url.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`=================================================`);
