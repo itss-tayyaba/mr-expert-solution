@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, Phone, MessageCircle, Star, ShieldCheck, CheckCircle2, 
-  Sparkles, Play, Award 
+  Sparkles, Play, Award, Globe, Building2, CreditCard, ShoppingCart, Laptop
 } from 'lucide-react';
 import { OrderModal } from '../shared/OrderModal';
 import { MapIntroPreloader } from '../shared/MapIntroPreloader';
@@ -21,7 +21,7 @@ export const Hero: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 500, y: 350 });
   const [isHovering, setIsHovering] = useState(false);
 
-  // 6-Second automatic map & headline replacement (User requested: "after 6 sec it will replace with 3rd image")
+  // 6-Second automatic map & headline replacement
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev === 0 ? 1 : 0));
@@ -44,13 +44,6 @@ export const Hero: React.FC = () => {
   };
 
   // Rotating search prompts with typewriter effect
-  const searchPrompts = [
-    "How to file an LLC?",
-    "How to open a business bank account?",
-    "How to register a UK LTD?",
-    "How to get Stripe for non-US residents?"
-  ];
-  const [currentPromptIdx, setCurrentPromptIdx] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -71,12 +64,11 @@ export const Hero: React.FC = () => {
   }, [typedText, isDeleting, activeSlide]);
 
   useEffect(() => {
-    // Reset typing when slide changes
     setIsDeleting(true);
     setTimeout(() => {
       setIsDeleting(false);
       setTypedText("");
-    }, 300);
+    }, 280);
   }, [activeSlide]);
 
   const partnerLogos = [
@@ -126,7 +118,7 @@ export const Hero: React.FC = () => {
         {/* ========================================================================= */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-0">
           
-          {/* US Map (Slide 0 - Visible in Image 1 & 2) */}
+          {/* US Map (Slide 0) */}
           <div
             className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[1150px] transition-opacity duration-1000 ease-in-out ${
               activeSlide === 0 ? 'opacity-25' : 'opacity-0'
@@ -135,7 +127,7 @@ export const Hero: React.FC = () => {
             <USMapVector className="w-full h-auto text-emerald-900 fill-emerald-800/15 stroke-emerald-900/40 stroke-[0.7]" />
           </div>
 
-          {/* UK Map (Slide 1 - Visible in Image 3) */}
+          {/* UK Map (Slide 1) */}
           <div
             className={`absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[720px] transition-opacity duration-1000 ease-in-out ${
               activeSlide === 1 ? 'opacity-25' : 'opacity-0'
@@ -183,37 +175,34 @@ export const Hero: React.FC = () => {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#f9fbfa] via-[#f9fbfa]/80 to-transparent z-[2]" />
 
         {/* ========================================================================= */}
-        {/* FOREGROUND CONTENT (Matches User Images 1, 2, 3 Exactly)                   */}
+        {/* FOREGROUND CONTENT (Matches User Images Exactly)                          */}
         {/* ========================================================================= */}
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           
           <div className="max-w-4xl mx-auto text-center space-y-6">
             
-            {/* 1. Expert.ai Pill Search Bar (Exact Match to User Images 1, 2, 3) */}
+            {/* 1. Expert.ai Pill Search Bar */}
             <div className="inline-flex items-center">
               <Link
                 to="/website-readiness-checker"
                 className="group flex items-center gap-3 bg-white hover:bg-gray-50 border border-gray-200/90 shadow-md shadow-gray-200/50 rounded-2xl sm:rounded-full px-3 py-1.5 sm:px-3 sm:py-2 transition-all hover:scale-[1.01]"
               >
-                {/* Green Expert.ai Tag */}
                 <span className="px-3.5 py-1 rounded-xl sm:rounded-full bg-[#0f533a] text-white font-bold text-xs sm:text-sm tracking-tight flex items-center gap-1 shadow-xs">
                   <span>Expert.ai</span>
                 </span>
 
-                {/* Animated Typewriter Search Text */}
                 <div className="text-xs sm:text-base font-normal text-gray-700 px-2 min-w-[180px] sm:min-w-[240px] text-left flex items-center">
                   <span>{typedText}</span>
                   <span className="inline-block w-[1.5px] h-4 bg-emerald-800 ml-0.5 animate-pulse" />
                 </div>
 
-                {/* Arrow Icon */}
                 <span className="p-1 rounded-full text-emerald-800 group-hover:translate-x-1 transition-transform">
                   <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>
             </div>
 
-            {/* 2. Main Headline (Matches User Images 1, 2, 3) */}
+            {/* 2. Main Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] text-gray-900 leading-[1.06] font-display">
               <span>Start Your </span>
               <span className="text-[#0f533a]">Business</span>
@@ -221,18 +210,17 @@ export const Hero: React.FC = () => {
               <span>The </span>
               <span className="text-[#0f533a]">Right Way</span>
               <br />
-              {/* Dynamic rotating 3rd line with smooth animation */}
               <span className="inline-block text-[#0f533a] transition-all duration-500 ease-out">
                 {activeSlide === 0 ? "Payment Gateways" : "UK LTD"}
               </span>
             </h1>
 
-            {/* 3. Subtitle (Exact Match to User Images 1, 2, 3) */}
+            {/* 3. Subtitle */}
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Stop guessing. Stop stalling. We file, register, and bank your business — so you launch fast and focus on revenue, not paperwork.
             </p>
 
-            {/* 4. Action Buttons (Exact Match to User Image 1) */}
+            {/* 4. Action Buttons (Exact Match to User Image 1 & Image 4) */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
               <button
                 onClick={() => setOrderModalOpen(true)}
@@ -253,8 +241,82 @@ export const Hero: React.FC = () => {
               </a>
             </div>
 
+            {/* ========================================================================= */}
+            {/* 5. NEW TRUST ROW: AVATARS & TRUSTPILOT PILL (Exact Match to User Image 4) */}
+            {/* ========================================================================= */}
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              
+              {/* Overlapping client avatars + 250+ businesses launched */}
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2.5 overflow-hidden">
+                  <img src="/assets/client-1-BRhP6Hce.jpg" alt="Client" className="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white object-cover shadow-xs" />
+                  <img src="/assets/client-2-rSdM2uUt.jpg" alt="Client" className="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white object-cover shadow-xs" />
+                  <img src="/assets/client-3-jy82LSv9.jpg" alt="Client" className="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white object-cover shadow-xs" />
+                  <img src="/assets/client-4-CQ72cwvv.jpg" alt="Client" className="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white object-cover shadow-xs" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs sm:text-sm font-bold text-gray-900 leading-tight">
+                    250+ businesses launched
+                  </div>
+                  <div className="text-[11px] text-gray-500 leading-tight">
+                    20+ countries · 98% success rate
+                  </div>
+                </div>
+              </div>
+
+              {/* Dot Separator */}
+              <span className="hidden sm:inline-block h-1 w-1 rounded-full bg-gray-300" />
+
+              {/* Trustpilot Pill Badge (Exact Match to User Image 4) */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/90 shadow-xs text-xs">
+                <span className="font-bold text-[#00b67a] flex items-center gap-1">
+                  <span className="text-sm leading-none">★</span> Trustpilot
+                </span>
+                <span className="text-[#00b67a] tracking-widest text-xs font-bold">
+                  ★★★★★
+                </span>
+                <span className="font-bold text-gray-900 text-xs ml-0.5">4.8</span>
+              </div>
+
+            </div>
+
+            {/* ========================================================================= */}
+            {/* 6. 5-PILLAR SERVICE BADGES (Exact Match to User Image 4)                  */}
+            {/* ========================================================================= */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 gap-y-2.5 text-xs sm:text-sm font-medium text-gray-700">
+              <div className="flex items-center gap-2 hover:text-[#0f533a] transition-colors">
+                <Globe className="h-4 w-4 text-[#0f533a]" />
+                <span>Company Formation</span>
+              </div>
+              <div className="flex items-center gap-2 hover:text-[#0f533a] transition-colors">
+                <Building2 className="h-4 w-4 text-[#0f533a]" />
+                <span>Business Banking</span>
+              </div>
+              <div className="flex items-center gap-2 hover:text-[#0f533a] transition-colors">
+                <CreditCard className="h-4 w-4 text-[#0f533a]" />
+                <span>Payments & Gateways</span>
+              </div>
+              <div className="flex items-center gap-2 hover:text-[#0f533a] transition-colors">
+                <ShoppingCart className="h-4 w-4 text-[#0f533a]" />
+                <span>E-commerce Setup</span>
+              </div>
+              <div className="flex items-center gap-2 hover:text-[#0f533a] transition-colors">
+                <Laptop className="h-4 w-4 text-[#0f533a]" />
+                <span>Website Setup</span>
+              </div>
+            </div>
+
+            {/* ========================================================================= */}
+            {/* 7. GREEN PUNCHLINE (Exact Match to User Image 4)                          */}
+            {/* ========================================================================= */}
+            <div className="pt-1">
+              <p className="text-sm sm:text-base font-bold text-[#0f533a] tracking-tight">
+                One Team. One Place. Every Moving Part Handled.
+              </p>
+            </div>
+
             {/* Mini carousel slide indicator dots (6 seconds switch indicator) */}
-            <div className="pt-2 flex items-center justify-center gap-2">
+            <div className="pt-3 flex items-center justify-center gap-2">
               <button
                 onClick={() => setActiveSlide(0)}
                 className={`h-2 rounded-full transition-all ${
