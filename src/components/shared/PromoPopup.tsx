@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { submitLeadApi } from '../../utils/api';
 
 interface PromoPopupProps {
   isOpenOverride?: boolean;
@@ -33,10 +34,11 @@ export const PromoPopup: React.FC<PromoPopupProps> = ({ isOpenOverride, onCloseO
     if (onCloseOverride) onCloseOverride();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setIsSubmitted(true);
+    await submitLeadApi(email);
     confetti({
       particleCount: 80,
       spread: 70,

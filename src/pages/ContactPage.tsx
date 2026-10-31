@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, MessageCircle, Clock, ShieldCheck, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { submitContactApi } from '../utils/api';
 
 export const ContactPage: React.FC = () => {
   const [fullName, setFullName] = useState('');
@@ -10,9 +11,16 @@ export const ContactPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    await submitContactApi({
+      name: fullName,
+      email,
+      phone,
+      service: serviceNeeded,
+      message
+    });
     confetti({
       particleCount: 80,
       spread: 70,

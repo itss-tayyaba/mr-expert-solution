@@ -18,6 +18,7 @@ import { TestimonialsPage } from './pages/TestimonialsPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { RefundPolicyPage } from './pages/RefundPolicyPage';
+import { AdminPage } from './pages/AdminPage';
 
 export function App() {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -41,6 +42,7 @@ export function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/refund-policy" element={<RefundPolicyPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />

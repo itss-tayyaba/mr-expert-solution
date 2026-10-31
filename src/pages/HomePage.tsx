@@ -4,6 +4,7 @@ import { StatsSection } from '../components/home/StatsSection';
 import { ServicesSection } from '../components/home/ServicesSection';
 import { GlobalMapSection } from '../components/home/GlobalMapSection';
 import { StatesPreview } from '../components/home/StatesPreview';
+import { PricingSectionWithTable } from '../components/home/PricingSectionWithTable';
 import { ProcessSection } from '../components/home/ProcessSection';
 import { ReadinessTeaser } from '../components/home/ReadinessTeaser';
 import { TestimonialsSection } from '../components/home/TestimonialsSection';
@@ -18,6 +19,7 @@ export const HomePage: React.FC = () => {
       <ServicesSection />
       <GlobalMapSection />
       <StatesPreview />
+      <PricingSectionWithTable />
       <ProcessSection />
       <ReadinessTeaser />
       <TestimonialsSection />

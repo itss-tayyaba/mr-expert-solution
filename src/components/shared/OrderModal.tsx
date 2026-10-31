@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Check, Shield, Sparkles, Building2, CreditCard, ChevronRight, ArrowRight } from 'lucide-react';
 import { usaPackages, ukPackages, canadaPackages, availableAddOns } from '../../data/pricingData';
 import { usStates } from '../../data/usStatesData';
+import { submitOrderApi } from '../../utils/api';
 import confetti from 'canvas-confetti';
 
 interface OrderModalProps {
@@ -53,9 +54,24 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsCompleted(true);
+    
+    // Dispatch to real backend API
+    await submitOrderApi({
+      companyName: companyName || 'Company Name Pending',
+      fullName,
+      email,
+      phone,
+      jurisdiction,
+      packageName: currentPackage.name,
+      stateCode: selectedStateCode,
+      addOns: selectedAddOns,
+      totalPrice,
+      currency: currencySymbol.replace('$', '').trim() || 'USD'
+    });
+
     confetti({
       particleCount: 100,
       spread: 70,
