@@ -10,44 +10,30 @@ interface MapIntroPreloaderProps {
 
 export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow = false, onFinish }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [percent, setPercent] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Smooth cinematic percentage counter (takes ~3.0s total)
+    // Smooth cinematic progress without big percentage number
     let current = 0;
     
     const interval = setInterval(() => {
-      // Pacing curve:
-      // 0% -> 60%: steady progression
-      // 60% -> 95%: smooth acceleration
-      // 95% -> 99%: pauses slightly so the iconic 99% is clearly visible (as in screenshot)
-      let increment = 1;
-      if (current < 50) {
-        increment = 2;
-      } else if (current < 85) {
-        increment = 2;
-      } else if (current < 99) {
-        increment = 1;
-      } else {
-        increment = 1;
-      }
-
+      let increment = current < 60 ? 2 : 1;
       current += increment;
 
       if (current >= 100) {
         current = 100;
-        setPercent(100);
+        setProgress(100);
         clearInterval(interval);
 
-        // Hold at 100% for 800ms so the complete state is admired
+        // Hold briefly at completion, then smoothly exit
         setTimeout(() => {
           setIsVisible(false);
           if (onFinish) onFinish();
-        }, 800);
+        }, 700);
       } else {
-        setPercent(current);
+        setProgress(current);
       }
-    }, 45); // 45ms * ~65 ticks = ~3.0 seconds
+    }, 38);
 
     return () => clearInterval(interval);
   }, [onFinish]);
@@ -64,10 +50,10 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
       <motion.div
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 1.05 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         className="fixed inset-0 z-[100] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-[#0a5236] via-[#08452c] to-[#042d1c] text-white p-6 sm:p-10 select-none"
       >
-        {/* Subtle grid background pattern (Exact match to screenshot) */}
+        {/* Subtle coordinate grid background pattern */}
         <div
           className="pointer-events-none absolute inset-0 opacity-15"
           style={{
@@ -98,7 +84,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
           </button>
         </div>
 
-        {/* Center: US Map with Animated Counter & Glow (Exact match to screenshot) */}
+        {/* Center: Clean Glowing US Map (Without Percentage Number) */}
         <div className="relative w-full max-w-4xl my-auto flex items-center justify-center">
           
           {/* Map Vector Component */}
@@ -123,7 +109,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
               </span>
             </div>
 
-            <div className="absolute top-[48%] left-[29%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[52%] left-[29%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow"></span>
@@ -133,7 +119,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
               </span>
             </div>
 
-            <div className="absolute top-[34%] left-[84%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[38%] left-[79%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow"></span>
@@ -143,7 +129,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
               </span>
             </div>
 
-            <div className="absolute top-[78%] left-[78%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[75%] left-[73%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow"></span>
@@ -154,22 +140,15 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
             </div>
           </motion.div>
 
-          {/* Centered Overlay inside the Map (Exact match to screenshot decfd595) */}
+          {/* Centered Headline inside the Map (WITHOUT percentage number as requested) */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none z-20">
             <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
+              transition={{ delay: 0.25, duration: 0.6 }}
               className="flex flex-col items-center"
             >
-              {/* Bold Percentage Number */}
-              <div className="flex items-baseline justify-center font-display font-black text-emerald-900 text-6xl sm:text-7xl lg:text-8xl tracking-tight filter drop-shadow-[0_2px_14px_rgba(255,255,255,0.75)]">
-                <span>{percent}</span>
-                <span className="text-2xl sm:text-3xl font-extrabold ml-1 text-emerald-800">%</span>
-              </div>
-
-              {/* Subtitle Line */}
-              <div className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-extrabold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-emerald-900/90 font-mono filter drop-shadow-[0_1px_5px_rgba(255,255,255,0.8)]">
+              <div className="text-xs sm:text-sm lg:text-base font-extrabold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-emerald-900 font-mono filter drop-shadow-[0_1px_6px_rgba(255,255,255,0.9)] bg-white/80 backdrop-blur-xs px-5 py-2 rounded-full border border-white shadow-md">
                 ACTIVATING YOUR U.S. PRESENCE
               </div>
             </motion.div>
@@ -187,7 +166,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
           <div className="w-full h-1 sm:h-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 overflow-hidden relative shadow-inner">
             <div
               className="h-full bg-gradient-to-r from-emerald-300 via-white to-emerald-400 shadow-[0_0_12px_#34d399] transition-all duration-75"
-              style={{ width: `${percent}%` }}
+              style={{ width: `${progress}%` }}
             />
           </div>
 
