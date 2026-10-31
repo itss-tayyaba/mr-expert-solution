@@ -21,11 +21,11 @@ export const Hero: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 500, y: 350 });
   const [isHovering, setIsHovering] = useState(false);
 
-  // 6-Second automatic map & headline replacement
+  // 20-Second automatic map & headline replacement (User requested 20s transition)
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev === 0 ? 1 : 0));
-    }, 6000);
+    }, 20000);
     return () => clearInterval(timer);
   }, []);
 
@@ -118,22 +118,22 @@ export const Hero: React.FC = () => {
         {/* ========================================================================= */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden z-0">
           
-          {/* US Map (Slide 0) */}
+          {/* US Map (Slide 0) - Compact, Opaque Solid Silhouette */}
           <div
-            className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[1150px] transition-opacity duration-1000 ease-in-out ${
-              activeSlide === 0 ? 'opacity-25' : 'opacity-0'
+            className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[86vw] max-w-[960px] transition-opacity duration-1000 ease-in-out ${
+              activeSlide === 0 ? 'opacity-90' : 'opacity-0'
             }`}
           >
-            <USMapVector className="w-full h-auto text-emerald-900 fill-emerald-800/15 stroke-emerald-900/40 stroke-[0.7]" />
+            <USMapVector className="w-full h-auto text-emerald-900 fill-[#dcece3] stroke-[#bcded0] stroke-[0.8]" />
           </div>
 
-          {/* UK Map (Slide 1) */}
+          {/* UK Map (Slide 1) - Compact, Not Large, Opaque Solid Silhouette (Transitions after 20s) */}
           <div
-            className={`absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[720px] transition-opacity duration-1000 ease-in-out ${
-              activeSlide === 1 ? 'opacity-25' : 'opacity-0'
+            className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36vw] max-w-[390px] transition-opacity duration-1000 ease-in-out ${
+              activeSlide === 1 ? 'opacity-95' : 'opacity-0'
             }`}
           >
-            <UKMapVector className="w-full h-auto text-emerald-900 fill-emerald-800/15 stroke-emerald-900/40 stroke-[0.7]" />
+            <UKMapVector className="w-full h-auto text-emerald-900 fill-[#dcece3] stroke-[#bcded0] stroke-[0.8]" />
           </div>
         </div>
 
@@ -153,20 +153,20 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 flex items-center justify-center drop-shadow-[0_0_8px_rgba(15,83,58,0.7)] drop-shadow-[0_0_18px_rgba(16,185,129,0.4)]">
             {/* Dark green edge highlight for US Map */}
             <div
-              className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[1150px] transition-opacity duration-1000 ${
+              className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[86vw] max-w-[960px] transition-opacity duration-1000 ${
                 activeSlide === 0 ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <USMapVector className="w-full h-auto text-[#0a4831] fill-emerald-700/25 stroke-[#083d29] stroke-[2.8]" />
+              <USMapVector className="w-full h-auto text-[#0a4831] fill-emerald-700/35 stroke-[#083d29] stroke-[2.8]" />
             </div>
 
             {/* Dark green edge highlight for UK Map */}
             <div
-              className={`absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[720px] transition-opacity duration-1000 ${
+              className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36vw] max-w-[390px] transition-opacity duration-1000 ${
                 activeSlide === 1 ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <UKMapVector className="w-full h-auto text-[#0a4831] fill-emerald-700/25 stroke-[#083d29] stroke-[2.8]" />
+              <UKMapVector className="w-full h-auto text-[#0a4831] fill-emerald-700/35 stroke-[#083d29] stroke-[2.8]" />
             </div>
           </div>
         </div>
