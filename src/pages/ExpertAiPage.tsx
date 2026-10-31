@@ -313,21 +313,21 @@ export const ExpertAiPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 3. AI-GUIDED FORMATION BENTO SECTION (Exact Match to Screenshot)           */}
       {/* ========================================================================= */}
-      <section className="py-24 bg-[#04140c] relative overflow-hidden border-t border-emerald-950">
+      <section className="py-16 sm:py-20 bg-[#04140c] relative overflow-hidden border-t border-emerald-950">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-6xl">
           
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-emerald-950 text-emerald-400 border border-emerald-500/30">
               <Sparkles className="h-3 w-3" />
               <span>COMPREHENSIVE STACK</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-display">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white font-display">
               AI-Guided Formation through <br />
               <span className="text-emerald-400">Federal Taxes</span> for Your Users.
             </h2>
             
-            <p className="text-sm sm:text-base text-gray-400 max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto">
               Every step from initial filing to federal tax IDs — structured under your brand with automated validation and status tracking.
             </p>
           </div>
