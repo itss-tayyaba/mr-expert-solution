@@ -184,7 +184,7 @@ export const Hero: React.FC = () => {
             {/* 1. Expert.ai Pill Search Bar */}
             <div className="inline-flex items-center">
               <Link
-                to="/website-readiness-checker"
+                to="/expert-ai"
                 className="group flex items-center gap-3 bg-white hover:bg-gray-50 border border-gray-200/90 shadow-md shadow-gray-200/50 rounded-2xl sm:rounded-full px-3 py-1.5 sm:px-3 sm:py-2 transition-all hover:scale-[1.01]"
               >
                 <span className="px-3.5 py-1 rounded-xl sm:rounded-full bg-[#0f533a] text-white font-bold text-xs sm:text-sm tracking-tight flex items-center gap-1 shadow-xs">

@@ -19,6 +19,7 @@ import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { RefundPolicyPage } from './pages/RefundPolicyPage';
 import { AdminPage } from './pages/AdminPage';
+import { ExpertAiPage } from './pages/ExpertAiPage';
 
 export function App() {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -26,7 +27,7 @@ export function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
-      {/* Full-screen Opening Animated Map Preloader (matches mrexpertsolution.com splash) */}
+      {/* Full-screen Opening Animated Map Preloader */}
       <MapIntroPreloader forceShow={true} onFinish={() => setShowPreloader(false)} />
 
       <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
@@ -34,6 +35,7 @@ export function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/expert-ai" element={<ExpertAiPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/us-states-comparison" element={<USStatesComparisonPage />} />
             <Route path="/all-services" element={<AllServicesPage />} />

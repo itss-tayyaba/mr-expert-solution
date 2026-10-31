@@ -153,8 +153,10 @@ export const Navbar: React.FC = () => {
               
               {/* Expert AI Link */}
               <Link
-                to="/website-readiness-checker"
-                className="hover:text-emerald-700 transition-colors font-medium text-gray-700 flex items-center gap-1"
+                to="/expert-ai"
+                className={`hover:text-emerald-700 transition-colors font-medium flex items-center gap-1 ${
+                  location.pathname === '/expert-ai' ? 'text-emerald-700 font-bold' : 'text-gray-700'
+                }`}
               >
                 <span>Expert AI</span>
               </Link>
@@ -312,8 +314,11 @@ export const Navbar: React.FC = () => {
               <Link to="/" className="block px-3 py-2 rounded-xl font-medium text-gray-800 hover:bg-emerald-50">
                 Home
               </Link>
+              <Link to="/expert-ai" className="block px-3 py-2 rounded-xl font-medium text-gray-800 hover:bg-emerald-50">
+                Expert AI (B2B Platform API)
+              </Link>
               <Link to="/website-readiness-checker" className="block px-3 py-2 rounded-xl font-medium text-gray-800 hover:bg-emerald-50">
-                Expert AI & Website Scanner
+                Website Readiness Scanner
               </Link>
               <Link to="/pricing" className="block px-3 py-2 rounded-xl font-medium text-gray-800 hover:bg-emerald-50">
                 Pricing Plans
