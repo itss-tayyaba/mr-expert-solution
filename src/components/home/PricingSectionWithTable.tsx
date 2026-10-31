@@ -1,38 +1,47 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Check, X, Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Check, X, Sparkles, Shield, ArrowRight, Star, HelpCircle } from 'lucide-react';
 import { usaPackages } from '../../data/pricingData';
 import { OrderModal } from '../shared/OrderModal';
 
+interface MatrixRow {
+  feature: string;
+  basic: boolean | string;
+  standard: boolean | string;
+  gold: boolean | string;
+  platinum: boolean | string;
+}
+
+const comparisonMatrix: MatrixRow[] = [
+  { feature: "Articles of Organization Filing", basic: true, standard: true, gold: true, platinum: true },
+  { feature: "Official State Filing Fees Included", basic: false, standard: false, gold: false, platinum: false },
+  { feature: "Registered Agent Service (1st Year)", basic: "Optional", standard: true, gold: true, platinum: true },
+  { feature: "Physical US Business Address", basic: false, standard: true, gold: true, platinum: true },
+  { feature: "IRS Official Form CP575 EIN", basic: "Optional", standard: true, gold: true, platinum: true },
+  { feature: "FinCEN BOI Compliance Filing", basic: false, standard: true, gold: true, platinum: true },
+  { feature: "Operating Agreement & Resolutions", basic: "Template", standard: true, gold: true, platinum: true },
+  { feature: "US Business Bank Account Setup", basic: false, standard: "Guidance", gold: "Pre-Approved", platinum: "VIP Concierge" },
+  { feature: "Stripe & PayPal Merchant Gateway", basic: false, standard: false, gold: true, platinum: true },
+  { feature: "Dedicated US Phone & SMS (1 Month)", basic: false, standard: false, gold: true, platinum: "1 Year" },
+  { feature: "Expedited 24-48h State Processing", basic: false, standard: false, gold: true, platinum: true },
+  { feature: "USPTO Trademark Clearance Search", basic: false, standard: false, gold: false, platinum: true },
+  { feature: "1-on-1 Attorney Consultation Call", basic: false, standard: false, gold: false, platinum: "30 Mins" },
+  { feature: "Turnaround Time", basic: "5-7 Days", standard: "3-5 Days", gold: "2-3 Days", platinum: "24-48 Hours" },
+];
+
 export const PricingSectionWithTable: React.FC = () => {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('usa-gold');
+  const [selectedPkgId, setSelectedPkgId] = useState<string>('usa-gold');
 
-  const handleOrder = (planId: string) => {
-    setSelectedPlan(planId);
+  const handleSelectPackage = (pkgId: string) => {
+    setSelectedPkgId(pkgId);
     setOrderModalOpen(true);
   };
 
-  const comparisonRows = [
-    { feature: "Complete LLC Formation Filing", standard: true, gold: true, premium: true, elite: true },
-    { feature: "Registered Agent Service (1 Full Year)", standard: true, gold: true, premium: true, elite: true },
-    { feature: "Physical US Business Address (1 Full Year)", standard: true, gold: true, premium: true, elite: true },
-    { feature: "Official IRS EIN (Form CP575 / 147C)", standard: true, gold: true, premium: true, elite: true },
-    { feature: "FinCEN BOI (Beneficial Ownership) Filing", standard: true, gold: true, premium: true, elite: true },
-    { feature: "Custom Operating Agreement & Resolutions", standard: true, gold: true, premium: true, elite: true },
-    { feature: "Unique Non-Shared Physical Suite Address", standard: false, gold: true, premium: true, elite: true },
-    { feature: "US Business Bank Account Assistance", standard: false, gold: "1 Bank (Mercury/Wise)", premium: "2 Banks (Mercury + Wise)", elite: "2 Banks Guaranteed" },
-    { feature: "Merchant Gateway Setup (Stripe / PayPal)", standard: false, gold: "1 Gateway", premium: "2 Gateways", elite: "2-3 Gateways" },
-    { feature: "Dedicated US Phone Number", standard: false, gold: "1 Month Included", premium: "1 Full Year", elite: "1 Full Year + SMS" },
-    { feature: "Full ITIN Application & Certification", standard: false, gold: false, premium: false, elite: "Included ($99 Value)" },
-    { feature: "1st Year Annual Tax Consultation (Form 5472)", standard: false, gold: false, premium: false, elite: true },
-    { feature: "Dedicated WhatsApp VIP Concierge", standard: "Standard Support", gold: "Priority Support", premium: "Dedicated Manager", elite: "Unlimited 1-on-1 Calls" }
-  ];
-
   return (
     <>
-      <section className="py-20 bg-background relative overflow-hidden border-t border-emerald-950/5">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="py-20 sm:py-28 bg-gradient-to-b from-background via-slate-50/50 to-background relative overflow-hidden" id="pricing-plans">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
@@ -48,7 +57,7 @@ export const PricingSectionWithTable: React.FC = () => {
             </p>
           </div>
 
-          {/* 4 Cards Grid (Gold card in solid rich emerald matching screenshot) */}
+          {/* 4 Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-6xl mx-auto">
             {usaPackages.map((pkg) => {
               const isGold = pkg.id === 'usa-gold';
@@ -58,15 +67,15 @@ export const PricingSectionWithTable: React.FC = () => {
                   key={pkg.id}
                   className={`relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                     isGold
-                      ? 'bg-emerald-900 text-white shadow-2xl ring-4 ring-emerald-500/30 scale-105 z-10'
-                      : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-emerald-200'
+                      ? 'bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl ring-4 ring-indigo-500/30 scale-105 z-10 border border-indigo-500/40'
+                      : 'bg-white text-gray-900 border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-indigo-300'
                   }`}
                 >
                   {/* Ribbon */}
                   {pkg.ribbon && (
                     <div
-                      className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-md ${
-                        isGold ? 'bg-amber-400 text-emerald-950' : 'bg-emerald-700 text-white'
+                      className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-md ${
+                        isGold ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-indigo-600 text-white'
                       }`}
                     >
                       {pkg.ribbon}
@@ -79,164 +88,125 @@ export const PricingSectionWithTable: React.FC = () => {
                       <h3 className={`text-xl font-bold font-display ${isGold ? 'text-white' : 'text-gray-900'}`}>
                         {pkg.name}
                       </h3>
-                      <p className={`text-xs mt-1 ${isGold ? 'text-emerald-200/80' : 'text-gray-500'}`}>
+                      <p className={`text-xs mt-1 ${isGold ? 'text-cyan-200/80' : 'text-gray-500'}`}>
                         {pkg.tagline}
                       </p>
                     </div>
 
                     {/* Price */}
-                    <div className={`pb-5 border-b ${isGold ? 'border-emerald-800' : 'border-gray-100'}`}>
+                    <div className={`pb-5 border-b ${isGold ? 'border-indigo-800/80' : 'border-slate-100'}`}>
                       <div className="flex items-baseline gap-1">
                         <span className={`text-3xl sm:text-4xl font-black font-display ${isGold ? 'text-white' : 'text-gray-900'}`}>
                           ${pkg.price}
                         </span>
-                        <span className={`text-xs font-semibold ${isGold ? 'text-emerald-200' : 'text-gray-500'}`}>
+                        <span className={`text-xs font-semibold ${isGold ? 'text-cyan-200' : 'text-gray-500'}`}>
                           {pkg.priceLabel}
                         </span>
                       </div>
-                      <div className={`mt-1.5 text-[11px] ${isGold ? 'text-emerald-300' : 'text-emerald-700 font-medium'}`}>
+                      <div className={`mt-1.5 text-[11px] ${isGold ? 'text-cyan-300' : 'text-indigo-600 font-medium'}`}>
                         Zero hidden markups on state government fees
                       </div>
                     </div>
 
                     {/* Features list */}
-                    <ul className={`py-5 space-y-2.5 text-xs ${isGold ? 'text-emerald-100' : 'text-gray-700'}`}>
-                      {pkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <Check className={`h-4 w-4 shrink-0 mt-0.5 stroke-[2.5] ${isGold ? 'text-emerald-300' : 'text-emerald-600'}`} />
-                          <span className="line-clamp-2">{feature}</span>
+                    <ul className="py-5 space-y-2.5 text-xs">
+                      {pkg.features.map((feat, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <Check className={`h-4 w-4 shrink-0 mt-0.5 ${isGold ? 'text-cyan-400' : 'text-indigo-600'}`} />
+                          <span className={isGold ? 'text-slate-200' : 'text-gray-700'}>
+                            {feat}
+                          </span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   {/* Button */}
-                  <div className={`pt-4 border-t ${isGold ? 'border-emerald-800' : 'border-gray-100'}`}>
+                  <div className="pt-2">
                     <button
-                      onClick={() => handleOrder(pkg.id)}
-                      className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
+                      onClick={() => handleSelectPackage(pkg.id)}
+                      className={`w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md ${
                         isGold
-                          ? 'bg-emerald-400 hover:bg-emerald-300 text-emerald-950 shadow-lg shadow-emerald-400/25 hover:-translate-y-0.5'
-                          : 'bg-emerald-700 hover:bg-emerald-800 text-white'
+                          ? 'bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-400 hover:to-cyan-400 text-white shadow-indigo-500/25'
+                          : 'bg-slate-900 hover:bg-slate-800 text-white hover:shadow-lg'
                       }`}
                     >
-                      <span>Choose {pkg.name}</span>
+                      <span>Get Started</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
-
                 </div>
               );
             })}
           </div>
 
-          {/* Full Package Comparison Table (Matching Screenshot) */}
-          <div className="mt-16 max-w-6xl mx-auto rounded-3xl bg-white border border-gray-200/90 shadow-lg overflow-hidden">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-bold font-display text-gray-900">
-                  Compare All Features Side-by-Side
-                </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
-                  Detailed comparison across Standard, Gold, Premium and Elite Pro tiers.
-                </p>
-              </div>
-              <Link
-                to="/pricing"
-                className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
-              >
-                <span>View Full Pricing Engine</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+          {/* Feature Comparison Table */}
+          <div className="mt-20 max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold font-display text-gray-900">
+                Detailed Feature Comparison
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                See exactly what each tier includes before making your decision
+              </p>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+            <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-gray-50 text-gray-800 font-bold border-b border-gray-200">
-                    <th className="py-4 px-6 w-2/5">Feature / Service</th>
-                    <th className="py-4 px-4 text-center">Standard ($99)</th>
-                    <th className="py-4 px-4 text-center bg-emerald-50 text-emerald-950 font-black">
-                      Gold ($199) ★
-                    </th>
-                    <th className="py-4 px-4 text-center">Premium ($250)</th>
-                    <th className="py-4 px-4 text-center">Elite Pro ($350)</th>
+                  <tr className="border-b border-slate-200 bg-slate-50/80">
+                    <th className="p-4 font-bold text-gray-900">Feature</th>
+                    <th className="p-4 font-bold text-center text-gray-700">Standard ($99)</th>
+                    <th className="p-4 font-bold text-center text-indigo-700 bg-indigo-50/50">Gold ($199)</th>
+                    <th className="p-4 font-bold text-center text-gray-700">Platinum ($349)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {comparisonRows.map((row, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="py-3.5 px-6 font-semibold text-gray-800">
+                <tbody className="divide-y divide-slate-100">
+                  {comparisonMatrix.map((row: MatrixRow, idx: number) => (
+                    <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-4 font-medium text-gray-900">
                         {row.feature}
                       </td>
-
-                      {/* Standard */}
-                      <td className="py-3.5 px-4 text-center">
-                        {typeof row.standard === 'boolean' ? (
-                          row.standard ? (
-                            <Check className="h-4 w-4 text-emerald-600 mx-auto stroke-[3]" />
-                          ) : (
-                            <X className="h-4 w-4 text-gray-300 mx-auto" />
-                          )
-                        ) : (
-                          <span className="font-medium text-gray-700">{row.standard}</span>
-                        )}
+                      <td className="p-4 text-center">
+                        {renderCell(row.basic)}
                       </td>
-
-                      {/* Gold (Highlighted Column) */}
-                      <td className="py-3.5 px-4 text-center bg-emerald-50/40 font-semibold text-emerald-950">
-                        {typeof row.gold === 'boolean' ? (
-                          row.gold ? (
-                            <Check className="h-4 w-4 text-emerald-700 mx-auto stroke-[3]" />
-                          ) : (
-                            <X className="h-4 w-4 text-gray-300 mx-auto" />
-                          )
-                        ) : (
-                          <span className="font-bold text-emerald-900">{row.gold}</span>
-                        )}
+                      <td className="p-4 text-center bg-indigo-50/30">
+                        {renderCell(row.gold)}
                       </td>
-
-                      {/* Premium */}
-                      <td className="py-3.5 px-4 text-center">
-                        {typeof row.premium === 'boolean' ? (
-                          row.premium ? (
-                            <Check className="h-4 w-4 text-emerald-600 mx-auto stroke-[3]" />
-                          ) : (
-                            <X className="h-4 w-4 text-gray-300 mx-auto" />
-                          )
-                        ) : (
-                          <span className="font-medium text-gray-700">{row.premium}</span>
-                        )}
-                      </td>
-
-                      {/* Elite Pro */}
-                      <td className="py-3.5 px-4 text-center">
-                        {typeof row.elite === 'boolean' ? (
-                          row.elite ? (
-                            <Check className="h-4 w-4 text-emerald-600 mx-auto stroke-[3]" />
-                          ) : (
-                            <X className="h-4 w-4 text-gray-300 mx-auto" />
-                          )
-                        ) : (
-                          <span className="font-bold text-emerald-800">{row.elite}</span>
-                        )}
+                      <td className="p-4 text-center">
+                        {renderCell(row.platinum)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+
+            <div className="mt-4 text-center text-xs text-gray-500">
+              * Official Secretary of State filing fees vary by state and are passed through at exact cost with zero agency markup.
+            </div>
           </div>
 
         </div>
       </section>
 
+      {/* Order Modal */}
       <OrderModal
         isOpen={orderModalOpen}
         onClose={() => setOrderModalOpen(false)}
-        initialJurisdiction="usa"
-        initialPackageId={selectedPlan}
+        initialPackageId={selectedPkgId}
       />
     </>
   );
 };
+
+function renderCell(val: boolean | string) {
+  if (typeof val === 'boolean') {
+    return val ? (
+      <Check className="h-4 w-4 text-indigo-600 mx-auto" />
+    ) : (
+      <X className="h-4 w-4 text-gray-300 mx-auto" />
+    );
+  }
+  return <span className="font-semibold text-gray-800 text-[11px]">{val}</span>;
+}

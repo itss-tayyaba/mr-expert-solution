@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Sparkles, Building2, Globe, Shield, 
-  CreditCard, Zap, FileCheck2, ArrowRight, MessageCircle, Lock, Palette
+  CreditCard, Zap, FileCheck2, ArrowRight, MessageCircle, Lock, Palette, Calculator
 } from 'lucide-react';
 import { OrderModal } from '../shared/OrderModal';
 
-type ThemeName = 'emerald' | 'midnight' | 'sapphire';
+type ThemeName = 'cobalt' | 'obsidian' | 'emerald' | 'sapphire';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [orderModalOpen, setOrderModalOpen] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState<ThemeName>('emerald');
+  const [currentTheme, setCurrentTheme] = useState<ThemeName>('cobalt');
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
   const location = useLocation();
 
@@ -25,9 +25,9 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Initialize theme from localStorage or default to emerald
+  // Initialize theme from localStorage or default to cobalt
   useEffect(() => {
-    const saved = (localStorage.getItem('mre_theme') as ThemeName) || 'emerald';
+    const saved = (localStorage.getItem('mre_theme') as ThemeName) || 'cobalt';
     setCurrentTheme(saved);
     document.documentElement.setAttribute('data-theme', saved);
   }, []);
@@ -76,26 +76,27 @@ export const Navbar: React.FC = () => {
   ];
 
   const themes: { id: ThemeName; name: string; dot: string; desc: string }[] = [
-    { id: 'emerald', name: 'Imperial Emerald', dot: 'bg-emerald-600', desc: 'Luxury Green & Gold' },
-    { id: 'midnight', name: 'Midnight Obsidian', dot: 'bg-slate-900', desc: 'Sleek Dark Slate & Mint' },
-    { id: 'sapphire', name: 'Royal Sapphire', dot: 'bg-blue-600', desc: 'Wall Street Executive Blue' },
+    { id: 'cobalt', name: 'Electric Cobalt', dot: 'bg-indigo-600', desc: 'Modern Fintech & Cyan Glow' },
+    { id: 'obsidian', name: 'Obsidian Onyx', dot: 'bg-slate-900', desc: 'Dark Executive Luxe' },
+    { id: 'emerald', name: 'Imperial Emerald', dot: 'bg-emerald-600', desc: 'Classic Signature Green' },
+    { id: 'sapphire', name: 'Royal Sapphire', dot: 'bg-blue-600', desc: 'Wall Street Executive' },
   ];
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
-        {/* Top Luxury Announcement Banner (Matches Screenshot) */}
-        <div className="bg-emerald-900 text-white text-[11px] sm:text-xs py-1.5 px-4 sm:px-6 transition-all duration-300 border-b border-emerald-800/60">
+        {/* Top Luxury Announcement Banner */}
+        <div className="bg-slate-900 text-white text-[11px] sm:text-xs py-1.5 px-4 sm:px-6 transition-all duration-300 border-b border-slate-800">
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-              <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-200">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span className="inline-flex items-center gap-1.5 font-semibold text-cyan-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping"></span>
                 ⚡ Fast 3-5 Business Days US LLC Formation
               </span>
-              <span className="hidden md:inline text-emerald-400">·</span>
-              <span className="hidden md:inline text-emerald-100 font-medium">0% US Tax for Non-Residents</span>
-              <span className="hidden lg:inline text-emerald-400">·</span>
-              <span className="hidden lg:inline text-emerald-100 font-medium">⭐ Rated 4.8/5 on Trustpilot</span>
+              <span className="hidden md:inline text-slate-600">·</span>
+              <span className="hidden md:inline text-slate-300 font-medium">0% US Tax for Non-Residents</span>
+              <span className="hidden lg:inline text-slate-600">·</span>
+              <span className="hidden lg:inline text-slate-300 font-medium">⭐ Rated 4.8/5 on Trustpilot</span>
             </div>
 
             <div className="flex items-center gap-3 sm:gap-4 shrink-0 font-medium">
@@ -104,9 +105,9 @@ export const Navbar: React.FC = () => {
                 href="https://wa.me/923291666671" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hidden sm:flex items-center gap-1.5 hover:text-emerald-200 transition-colors"
+                className="hidden sm:flex items-center gap-1.5 hover:text-cyan-300 transition-colors"
               >
-                <MessageCircle className="h-3.5 w-3.5 text-emerald-300" />
+                <MessageCircle className="h-3.5 w-3.5 text-cyan-400" />
                 <span>+92 329 166 6671</span>
               </a>
 
@@ -115,18 +116,18 @@ export const Navbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setThemeDropdownOpen(!themeDropdownOpen)}
-                  className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-800/80 hover:bg-emerald-850 text-emerald-100 border border-emerald-700/60 text-[11px] transition-colors"
+                  className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-[11px] transition-colors"
                   title="Switch Color Theme"
                 >
-                  <Palette className="h-3 w-3 text-emerald-300" />
+                  <Palette className="h-3 w-3 text-cyan-400" />
                   <span className="capitalize">{currentTheme}</span>
                   <div className={`h-2 w-2 rounded-full ${themes.find(t => t.id === currentTheme)?.dot}`} />
                 </button>
 
                 {themeDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-1.5 w-52 rounded-2xl bg-white text-gray-900 shadow-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="absolute right-0 top-full mt-1.5 w-56 rounded-2xl bg-white text-gray-900 shadow-2xl border border-slate-200 p-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                     <div className="text-[10px] uppercase font-bold text-gray-400 px-2 py-1 tracking-wider">
-                      Select Theme Scheme
+                      Select Aesthetic Palette
                     </div>
                     {themes.map((t) => (
                       <button
@@ -134,15 +135,18 @@ export const Navbar: React.FC = () => {
                         type="button"
                         onClick={() => handleSelectTheme(t.id)}
                         className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-left text-xs transition-colors ${
-                          currentTheme === t.id ? 'bg-emerald-50 text-emerald-800 font-semibold' : 'hover:bg-gray-50 text-gray-700'
+                          currentTheme === t.id ? 'bg-indigo-50 text-indigo-700 font-semibold' : 'hover:bg-gray-50 text-gray-700'
                         }`}
                       >
                         <div className="flex items-center gap-2">
                           <div className={`h-3 w-3 rounded-full ${t.dot}`} />
-                          <span>{t.name}</span>
+                          <div>
+                            <div>{t.name}</div>
+                            <div className="text-[10px] text-gray-400">{t.desc}</div>
+                          </div>
                         </div>
                         {currentTheme === t.id && (
-                          <span className="text-[10px] text-emerald-700 font-bold">Active</span>
+                          <span className="text-[10px] text-indigo-600 font-bold">Active</span>
                         )}
                       </button>
                     ))}
@@ -153,10 +157,10 @@ export const Navbar: React.FC = () => {
               {/* Admin Portal Quick Link */}
               <Link 
                 to="/admin" 
-                className="inline-flex items-center gap-1 text-[11px] text-emerald-200 hover:text-white transition-colors bg-emerald-800/60 hover:bg-emerald-800 px-2 py-0.5 rounded-full border border-emerald-700/40"
+                className="inline-flex items-center gap-1 text-[11px] text-slate-300 hover:text-white transition-colors bg-slate-800 hover:bg-slate-700 px-2.5 py-0.5 rounded-full border border-slate-700"
                 title="Management Dashboard"
               >
-                <Lock className="h-2.5 w-2.5" />
+                <Lock className="h-2.5 w-2.5 text-cyan-400" />
                 <span>Admin</span>
               </Link>
             </div>
@@ -167,8 +171,8 @@ export const Navbar: React.FC = () => {
         <div
           className={`transition-all duration-300 ${
             isScrolled
-              ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100 py-2.5'
-              : 'bg-white/90 backdrop-blur-sm border-b border-gray-100/70 py-3.5'
+              ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80 py-2.5'
+              : 'bg-white/90 backdrop-blur-sm border-b border-slate-200/60 py-3.5'
           }`}
         >
           <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -191,18 +195,18 @@ export const Navbar: React.FC = () => {
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1.5 hover:text-emerald-700 py-2 transition-colors font-medium text-gray-700"
+                  className="flex items-center gap-1.5 hover:text-indigo-600 py-2 transition-colors font-medium text-gray-700"
                 >
                   Services
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-emerald-700' : ''}`} />
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-indigo-600' : ''}`} />
                 </button>
 
                 {/* Mega Dropdown Menu */}
                 {servicesDropdownOpen && (
-                  <div className="absolute top-full -left-20 w-[720px] rounded-3xl bg-white p-6 shadow-2xl border border-emerald-100 animate-in fade-in slide-in-from-top-2 duration-200 grid grid-cols-3 gap-6">
+                  <div className="absolute top-full -left-20 w-[740px] rounded-3xl bg-white p-6 shadow-2xl border border-slate-200 animate-in fade-in slide-in-from-top-2 duration-200 grid grid-cols-3 gap-6">
                     {serviceCategories.map((cat, idx) => (
                       <div key={idx} className="space-y-3">
-                        <div className="text-xs font-bold uppercase tracking-wider text-emerald-800 border-b border-gray-100 pb-1.5">
+                        <div className="text-xs font-bold uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-1.5">
                           {cat.title}
                         </div>
                         <div className="space-y-1.5">
@@ -210,14 +214,14 @@ export const Navbar: React.FC = () => {
                             <Link
                               key={i}
                               to={item.href}
-                              className="group block p-2 rounded-xl hover:bg-emerald-50/70 transition-colors"
+                              className="group block p-2 rounded-xl hover:bg-indigo-50/70 transition-colors"
                             >
                               <div className="flex items-center justify-between">
-                                <span className="font-semibold text-xs text-gray-900 group-hover:text-emerald-700 transition-colors">
+                                <span className="font-semibold text-xs text-gray-900 group-hover:text-indigo-600 transition-colors">
                                   {item.name}
                                 </span>
                                 {item.tag && (
-                                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">
                                     {item.tag}
                                   </span>
                                 )}
@@ -230,13 +234,13 @@ export const Navbar: React.FC = () => {
                         </div>
                       </div>
                     ))}
-                    <div className="col-span-3 pt-3 border-t border-gray-100 flex items-center justify-between bg-emerald-50/40 -mx-6 -mb-6 p-4 rounded-b-3xl">
+                    <div className="col-span-3 pt-3 border-t border-slate-100 flex items-center justify-between bg-slate-50/80 -mx-6 -mb-6 p-4 rounded-b-3xl">
                       <span className="text-xs text-gray-600">
                         Need custom corporate structuring or B2B volume pricing?
                       </span>
                       <Link
                         to="/contact"
-                        className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
+                        className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
                       >
                         Talk to our corporate lawyer <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
@@ -247,39 +251,39 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to="/us-states-comparison"
-                className={`hover:text-emerald-700 transition-colors ${location.pathname === '/us-states-comparison' ? 'text-emerald-700 font-semibold' : ''}`}
+                className={`hover:text-indigo-600 transition-colors ${location.pathname === '/us-states-comparison' ? 'text-indigo-600 font-semibold' : ''}`}
               >
                 Compare States
               </Link>
 
               <Link
                 to="/pricing"
-                className={`hover:text-emerald-700 transition-colors ${location.pathname === '/pricing' ? 'text-emerald-700 font-semibold' : ''}`}
+                className={`hover:text-indigo-600 transition-colors ${location.pathname === '/pricing' ? 'text-indigo-600 font-semibold' : ''}`}
               >
                 Pricing
               </Link>
 
               <Link
                 to="/website-readiness-checker"
-                className={`flex items-center gap-1.5 hover:text-emerald-700 transition-colors ${location.pathname === '/website-readiness-checker' ? 'text-emerald-700 font-semibold' : ''}`}
+                className={`flex items-center gap-1.5 hover:text-indigo-600 transition-colors ${location.pathname === '/website-readiness-checker' ? 'text-indigo-600 font-semibold' : ''}`}
               >
                 Readiness Checker
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                 </span>
               </Link>
 
               <Link
                 to="/testimonials"
-                className={`hover:text-emerald-700 transition-colors ${location.pathname === '/testimonials' ? 'text-emerald-700 font-semibold' : ''}`}
+                className={`hover:text-indigo-600 transition-colors ${location.pathname === '/testimonials' ? 'text-indigo-600 font-semibold' : ''}`}
               >
                 Testimonials
               </Link>
 
               <Link
                 to="/contact"
-                className={`hover:text-emerald-700 transition-colors ${location.pathname === '/contact' ? 'text-emerald-700 font-semibold' : ''}`}
+                className={`hover:text-indigo-600 transition-colors ${location.pathname === '/contact' ? 'text-indigo-600 font-semibold' : ''}`}
               >
                 Contact
               </Link>
@@ -291,7 +295,7 @@ export const Navbar: React.FC = () => {
                 href="https://wa.me/923291666671?text=Hi%20MR%20EXPERT%20SOLUTION,%20I'd%20like%20to%20consult%20about%20forming%20a%20company."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-gray-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
               >
                 <MessageCircle className="h-4 w-4 text-emerald-600" />
                 WhatsApp
@@ -299,9 +303,9 @@ export const Navbar: React.FC = () => {
 
               <button
                 onClick={() => setOrderModalOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 shadow-md shadow-indigo-600/20 transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Sparkles className="h-4 w-4" />
+                <Sparkles className="h-4 w-4 text-cyan-300" />
                 Start Company
               </button>
             </div>
@@ -309,7 +313,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-700 hover:text-emerald-700 hover:bg-emerald-50 rounded-xl transition-colors"
+              className="lg:hidden p-2 text-gray-700 hover:text-indigo-600 hover:bg-slate-100 rounded-xl transition-colors"
               aria-label="Toggle navigation"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -321,15 +325,15 @@ export const Navbar: React.FC = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden px-4 pt-4 pb-6 bg-white border-b border-gray-200 shadow-xl space-y-4 animate-in slide-in-from-top-4 duration-200 max-h-[85vh] overflow-y-auto">
             {/* Mobile theme chooser */}
-            <div className="p-3 bg-gray-50 rounded-xl flex items-center justify-between">
-              <span className="text-xs font-semibold text-gray-700">Color Theme:</span>
+            <div className="p-3 bg-slate-50 rounded-xl flex items-center justify-between">
+              <span className="text-xs font-semibold text-gray-700">Theme:</span>
               <div className="flex gap-2">
                 {themes.map((t) => (
                   <button
                     key={t.id}
                     onClick={() => handleSelectTheme(t.id)}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border ${
-                      currentTheme === t.id ? 'bg-white border-emerald-600 shadow-xs' : 'border-gray-200 text-gray-600'
+                      currentTheme === t.id ? 'bg-white border-indigo-600 shadow-xs' : 'border-gray-200 text-gray-600'
                     }`}
                   >
                     <div className={`h-2.5 w-2.5 rounded-full ${t.dot}`} />
@@ -342,46 +346,46 @@ export const Navbar: React.FC = () => {
             <div className="space-y-1">
               <Link
                 to="/"
-                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 Home
               </Link>
               <Link
                 to="/pricing"
-                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 Pricing Plans
               </Link>
               <Link
                 to="/us-states-comparison"
-                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 Compare US States
               </Link>
               <Link
                 to="/website-readiness-checker"
-                className="flex items-center justify-between px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="flex items-center justify-between px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 <span>Website Readiness Checker</span>
-                <span className="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full">
+                <span className="text-[10px] font-bold px-2 py-0.5 bg-cyan-100 text-cyan-800 rounded-full">
                   Free Scan
                 </span>
               </Link>
               <Link
                 to="/testimonials"
-                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 Client Reviews
               </Link>
               <Link
                 to="/contact"
-                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-emerald-50"
+                className="block px-3 py-2 rounded-lg font-medium text-gray-800 hover:bg-indigo-50"
               >
                 Contact & Support
               </Link>
               <Link
                 to="/admin"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-emerald-800 hover:bg-emerald-50"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-indigo-700 hover:bg-indigo-50"
               >
                 <Lock className="h-4 w-4" />
                 Admin Dashboard
@@ -393,14 +397,14 @@ export const Navbar: React.FC = () => {
                 All Formation Services
               </div>
               <div className="grid grid-cols-1 gap-1 text-xs text-gray-600 px-3">
-                <Link to="/services/usa-llc-formation" className="py-1 hover:text-emerald-700">🇺🇸 USA LLC Formation</Link>
-                <Link to="/services/uk-ltd-formation" className="py-1 hover:text-emerald-700">🇬🇧 UK LTD Formation</Link>
-                <Link to="/services/business-banking" className="py-1 hover:text-emerald-700">💳 US & UK Business Banking</Link>
-                <Link to="/services/payment-gateways" className="py-1 hover:text-emerald-700">⚡ Stripe & PayPal Gateway</Link>
-                <Link to="/services/ein" className="py-1 hover:text-emerald-700">📄 IRS EIN Registration</Link>
-                <Link to="/services/itin-service" className="py-1 hover:text-emerald-700">🆔 ITIN Service ($99 Offer)</Link>
-                <Link to="/services/trademark-registration" className="py-1 hover:text-emerald-700">🛡️ US Trademark Registration</Link>
-                <Link to="/services/tax-filing" className="py-1 hover:text-emerald-700">📊 Tax Filing & BOI Compliance</Link>
+                <Link to="/services/usa-llc-formation" className="py-1 hover:text-indigo-600">🇺🇸 USA LLC Formation</Link>
+                <Link to="/services/uk-ltd-formation" className="py-1 hover:text-indigo-600">🇬🇧 UK LTD Formation</Link>
+                <Link to="/services/business-banking" className="py-1 hover:text-indigo-600">💳 US & UK Business Banking</Link>
+                <Link to="/services/payment-gateways" className="py-1 hover:text-indigo-600">⚡ Stripe & PayPal Gateway</Link>
+                <Link to="/services/ein" className="py-1 hover:text-indigo-600">📄 IRS EIN Registration</Link>
+                <Link to="/services/itin-service" className="py-1 hover:text-indigo-600">🆔 ITIN Service ($99 Offer)</Link>
+                <Link to="/services/trademark-registration" className="py-1 hover:text-indigo-600">🛡️ US Trademark Registration</Link>
+                <Link to="/services/tax-filing" className="py-1 hover:text-indigo-600">📊 Tax Filing & BOI Compliance</Link>
               </div>
             </div>
 
@@ -410,7 +414,7 @@ export const Navbar: React.FC = () => {
                   setMobileMenuOpen(false);
                   setOrderModalOpen(true);
                 }}
-                className="w-full py-3 rounded-xl bg-emerald-700 text-white font-semibold text-center text-sm shadow-md"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold text-center text-sm shadow-md"
               >
                 Start Your Company Now
               </button>
@@ -418,9 +422,9 @@ export const Navbar: React.FC = () => {
                 href="https://wa.me/923291666671"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-xl border border-emerald-300 text-emerald-800 font-semibold text-center text-xs flex items-center justify-center gap-2 bg-emerald-50"
+                className="w-full py-2.5 rounded-xl border border-slate-200 text-gray-800 font-semibold text-center text-xs flex items-center justify-center gap-2 bg-slate-50"
               >
-                <MessageCircle className="h-4 w-4" />
+                <MessageCircle className="h-4 w-4 text-emerald-600" />
                 Chat on WhatsApp (+92 329 166 6671)
               </a>
             </div>

@@ -41,7 +41,7 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
       } else {
         setPercent(current);
       }
-    }, 38);
+    }, 36);
 
     return () => clearInterval(interval);
   }, [forceShow, onFinish]);
@@ -60,33 +60,33 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 1.08 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed inset-0 z-[100] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-[#0a5236] via-[#08452c] to-[#042d1c] text-white p-6 sm:p-10 select-none"
+        className="fixed inset-0 z-[100] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-[#090D1A] via-[#0c1326] to-[#040814] text-white p-6 sm:p-10 select-none"
       >
         {/* Subtle grid background pattern */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-15"
+          className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px)
+              linear-gradient(to right, rgba(99, 102, 241, 0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(99, 102, 241, 0.15) 1px, transparent 1px)
             `,
             backgroundSize: '40px 40px'
           }}
         />
 
         {/* Ambient radial lighting behind map */}
-        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[900px] h-[450px] sm:h-[600px] rounded-full bg-emerald-400/20 blur-[100px]" />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[950px] h-[450px] sm:h-[600px] rounded-full bg-gradient-to-r from-indigo-500/25 via-cyan-500/20 to-teal-500/15 blur-[110px]" />
 
         {/* Top Header / Skip Control */}
         <div className="relative w-full max-w-5xl flex items-center justify-between z-10">
-          <div className="flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-emerald-200/80 font-mono">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+          <div className="flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-cyan-300 font-mono">
+            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
             <span>Global Gateway Initialization</span>
           </div>
 
           <button
             onClick={handleSkip}
-            className="text-xs tracking-wider uppercase font-semibold text-emerald-200 hover:text-white px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition-all flex items-center gap-1.5"
+            className="text-xs tracking-wider uppercase font-semibold text-cyan-200 hover:text-white px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition-all flex items-center gap-1.5 backdrop-blur-md"
           >
             <span>Skip Intro</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -103,90 +103,86 @@ export const MapIntroPreloader: React.FC<MapIntroPreloaderProps> = ({ forceShow 
             transition={{ duration: 0.9, ease: 'easeOut' }}
             className="w-full relative"
           >
-            <div className="relative drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] drop-shadow-[0_0_65px_rgba(16,185,129,0.35)]">
-              <USMapVector className="w-full h-auto max-h-[58vh] object-contain" />
+            <div className="relative drop-shadow-[0_0_35px_rgba(255,255,255,0.45)] drop-shadow-[0_0_70px_rgba(79,70,229,0.4)]">
+              <USMapVector className="w-full h-auto max-h-[58vh] object-contain text-white" />
             </div>
 
             {/* Glowing Hub Beacons on Key States (Wyoming, Delaware, New Mexico, Florida) */}
             <div className="absolute top-[28%] left-[28%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 border border-white"></span>
               </span>
-              <span className="absolute left-4 top-0 text-[10px] font-mono text-emerald-900 bg-white/90 px-1.5 py-0.5 rounded shadow font-bold hidden sm:inline">
+              <span className="absolute left-4 top-0 text-[10px] font-mono text-slate-900 bg-white/95 px-1.5 py-0.5 rounded shadow-lg font-bold hidden sm:inline">
                 WY · 0% Tax
               </span>
             </div>
 
-            <div className="absolute top-[48%] left-[29%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[37%] left-[78%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 border border-white"></span>
               </span>
-              <span className="absolute left-4 top-0 text-[10px] font-mono text-emerald-900 bg-white/90 px-1.5 py-0.5 rounded shadow font-bold hidden sm:inline">
-                NM · Albuquerque HQ
+              <span className="absolute left-4 top-0 text-[10px] font-mono text-slate-900 bg-white/95 px-1.5 py-0.5 rounded shadow-lg font-bold hidden sm:inline">
+                DE · VC Precedent
               </span>
             </div>
 
-            <div className="absolute top-[34%] left-[84%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[62%] left-[32%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500 border border-white"></span>
               </span>
-              <span className="absolute left-4 top-0 text-[10px] font-mono text-emerald-900 bg-white/90 px-1.5 py-0.5 rounded shadow font-bold hidden sm:inline">
-                DE · Court of Chancery
+              <span className="absolute left-4 top-0 text-[10px] font-mono text-slate-900 bg-white/95 px-1.5 py-0.5 rounded shadow-lg font-bold hidden sm:inline">
+                NM · Anonymous
               </span>
             </div>
 
-            <div className="absolute top-[78%] left-[78%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute top-[78%] left-[73%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500 border border-white"></span>
+              </span>
+              <span className="absolute left-4 top-0 text-[10px] font-mono text-slate-900 bg-white/95 px-1.5 py-0.5 rounded shadow-lg font-bold hidden sm:inline">
+                FL · Global Trade
               </span>
             </div>
-          </motion.div>
 
-          {/* Centered Overlay inside the Map (Matching user screenshot) */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none z-20">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex flex-col items-center"
-            >
-              {/* Bold Percentage */}
-              <div className="flex items-baseline justify-center font-display font-black text-emerald-900 text-6xl sm:text-7xl lg:text-8xl tracking-tight filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.7)]">
-                <span>{percent}</span>
-                <span className="text-2xl sm:text-3xl font-extrabold ml-1 text-emerald-800">%</span>
+            {/* In Center: Animated Percentage Counter (Matches Screenshot Exactly) */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
+              <div className="flex items-baseline">
+                <span className="text-6xl sm:text-7xl md:text-8xl font-black font-mono tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-cyan-100 to-indigo-200 drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+                  {percent}
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-400 ml-1">
+                  %
+                </span>
               </div>
 
-              {/* Subtitle */}
-              <div className="mt-1 sm:mt-2 text-[10px] sm:text-xs lg:text-sm font-extrabold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-emerald-900/90 font-mono filter drop-shadow-[0_1px_4px_rgba(255,255,255,0.8)]">
+              <div className="mt-2 text-[10px] sm:text-xs font-bold tracking-[0.35em] uppercase text-cyan-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 ACTIVATING YOUR U.S. PRESENCE
               </div>
-            </motion.div>
-          </div>
 
+              {/* Mini progress line indicator */}
+              <div className="w-32 sm:w-44 h-1 bg-white/20 rounded-full mt-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-300 transition-all duration-75"
+                  style={{ width: `${percent}%` }}
+                />
+              </div>
+            </div>
+
+          </motion.div>
         </div>
 
-        {/* Bottom Logo & Progress Bar (Matching user screenshot) */}
-        <div className="relative w-full max-w-sm flex flex-col items-center text-center space-y-3 z-10 pb-2">
-          <div className="text-sm sm:text-base font-extrabold uppercase tracking-[0.3em] text-white/95 font-display">
+        {/* Bottom Branding (Exact match to screenshot bottom) */}
+        <div className="relative text-center z-10 w-full max-w-md pb-2">
+          <div className="text-xs sm:text-sm font-extrabold tracking-[0.3em] uppercase text-white/90">
             MR EXPERT SOLUTION
           </div>
-
-          {/* Glowing Animated Progress Bar */}
-          <div className="w-full h-1 sm:h-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 overflow-hidden relative shadow-inner">
-            <motion.div
-              className="h-full bg-gradient-to-r from-emerald-300 via-white to-emerald-400 shadow-[0_0_12px_#34d399]"
-              style={{ width: `${percent}%` }}
-              transition={{ ease: 'linear' }}
-            />
-          </div>
-
-          <div className="flex items-center justify-between w-full text-[10px] text-emerald-300/70 font-mono">
-            <span>Wyoming · Delaware · UK LTD</span>
-            <span>Secured 256-Bit</span>
+          <div className="w-48 mx-auto h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-2" />
+          <div className="text-[10px] text-cyan-300/70 font-mono tracking-wider mt-1">
+            Global Corporate Formations & Fintech Infrastructure
           </div>
         </div>
 
