@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, MessageCircle, Star, ShieldCheck, CheckCircle2, 
-  Building2, Globe, CreditCard, Sparkles, FileText, Check 
+  Building2, Globe, CreditCard, Sparkles, FileText, Check, Play 
 } from 'lucide-react';
 import { OrderModal } from '../shared/OrderModal';
+import { MapIntroPreloader } from '../shared/MapIntroPreloader';
 
 export const Hero: React.FC = () => {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
+  const [showMapAnimation, setShowMapAnimation] = useState(false);
   const rotatingWords = ["US LLC", "UK LTD", "Global Brand", "Stripe Setup"];
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
 
@@ -34,6 +36,11 @@ export const Hero: React.FC = () => {
 
   return (
     <>
+      {/* Dynamic Map Animation Modal if replayed */}
+      {showMapAnimation && (
+        <MapIntroPreloader forceShow={true} onFinish={() => setShowMapAnimation(false)} />
+      )}
+
       <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-gradient-to-b from-emerald-50/50 via-background to-background">
         {/* Background glow ambient circles */}
         <div className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[700px] sm:w-[1000px] h-[400px] bg-gradient-to-tr from-emerald-400/15 via-teal-400/10 to-transparent blur-3xl -z-10 rounded-full" />
@@ -46,10 +53,17 @@ export const Hero: React.FC = () => {
               
               {/* Trustpilot & Announcement Pill */}
               <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3">
-                <span className="section-badge">
+                <button
+                  type="button"
+                  onClick={() => setShowMapAnimation(true)}
+                  className="section-badge hover:bg-emerald-100/70 transition-colors cursor-pointer group"
+                >
                   <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
-                  Start Your Business The Right Way
-                </span>
+                  <span>Start Your Business The Right Way</span>
+                  <span className="text-[10px] text-emerald-700 font-bold ml-1 flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                    <Play className="h-2.5 w-2.5 fill-current" /> Map Intro
+                  </span>
+                </button>
 
                 {/* Trustpilot Pill */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-gray-200/80 shadow-sm text-xs">
