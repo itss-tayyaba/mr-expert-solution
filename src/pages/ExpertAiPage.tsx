@@ -5,6 +5,7 @@ import {
   ShieldCheck, Zap, Building2, Globe, CreditCard, Laptop, ShoppingBag, 
   Users, Check, FileText, Send, X, Lock, Code2, Layers, DollarSign, MessageCircle
 } from 'lucide-react';
+import { InteractiveHubDiagram } from '../components/expert-ai/InteractiveHubDiagram';
 
 interface FaqItem {
   q: string;
@@ -331,52 +332,8 @@ export const ExpertAiPage: React.FC = () => {
             </p>
           </div>
 
-          {/* 3 Architecture Stack Cards (Matches Screenshot Architecture Bento) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div className="p-6 rounded-3xl bg-[#082015] border border-emerald-500/25 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-emerald-400 font-mono">01 · STATE FILING</span>
-                <Globe className="h-5 w-5 text-emerald-400" />
-              </div>
-              <h3 className="text-lg font-bold text-white">Articles of Organization</h3>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Direct integration with state corporate registries across Wyoming, Delaware, New Mexico, Florida, and UK Companies House with automated name checks.
-              </p>
-              <div className="pt-2 text-[11px] font-mono text-emerald-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-500/20">
-                ✓ Secretary of State Certified
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#082015] border border-emerald-500/25 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-emerald-400 font-mono">02 · IRS & FINTECH</span>
-                <CreditCard className="h-5 w-5 text-emerald-400" />
-              </div>
-              <h3 className="text-lg font-bold text-white">EIN & Banking Underwriting</h3>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Direct IRS CP575 dispatch and API handshakes with Mercury, Wise Business, and Relay for frictionless non-resident account setup.
-              </p>
-              <div className="pt-2 text-[11px] font-mono text-emerald-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-500/20">
-                ✓ 98.4% Banking Acceptance Rate
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#082015] border border-emerald-500/25 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-emerald-400 font-mono">03 · COMPLIANCE</span>
-                <ShieldCheck className="h-5 w-5 text-emerald-400" />
-              </div>
-              <h3 className="text-lg font-bold text-white">FinCEN BOI & Annual Reports</h3>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Automated Beneficial Ownership Information filing under the Corporate Transparency Act, state franchise tax alerts, and registered agent coverage.
-              </p>
-              <div className="pt-2 text-[11px] font-mono text-emerald-300 bg-emerald-950/60 p-2.5 rounded-xl border border-emerald-500/20">
-                ✓ 100% Legal Immunity Protection
-              </div>
-            </div>
-
-          </div>
+          {/* Interactive Formation Hub & Moving Circuit Bus Network (Exact Match to User Screenshot media_1793436534763) */}
+          <InteractiveHubDiagram />
 
         </div>
       </section>
