@@ -2,9 +2,7 @@ import React from 'react';
 import { Hero } from '../components/home/Hero';
 import { StatsSection } from '../components/home/StatsSection';
 import { ServicesSection } from '../components/home/ServicesSection';
-import { InteractiveStateWizard } from '../components/home/InteractiveStateWizard';
 import { GlobalMapSection } from '../components/home/GlobalMapSection';
-import { FormationCostCalculator } from '../components/home/FormationCostCalculator';
 import { StatesPreview } from '../components/home/StatesPreview';
 import { PricingSectionWithTable } from '../components/home/PricingSectionWithTable';
 import { ProcessSection } from '../components/home/ProcessSection';
@@ -19,9 +17,7 @@ export const HomePage: React.FC = () => {
       <Hero />
       <StatsSection />
       <ServicesSection />
-      <InteractiveStateWizard />
       <GlobalMapSection />
-      <FormationCostCalculator />
       <StatesPreview />
       <PricingSectionWithTable />
       <ProcessSection />

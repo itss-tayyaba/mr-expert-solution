@@ -6,7 +6,6 @@ import { WhatsAppButton } from './components/shared/WhatsAppButton';
 import { PromoPopup } from './components/shared/PromoPopup';
 import { ScrollToTop } from './components/shared/ScrollToTop';
 import { MapIntroPreloader } from './components/shared/MapIntroPreloader';
-import { LiveActivityToast } from './components/shared/LiveActivityToast';
 
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
@@ -27,8 +26,8 @@ export function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
-      {/* Full-screen Opening Animated Map Preloader */}
-      <MapIntroPreloader forceShow={false} onFinish={() => setShowPreloader(false)} />
+      {/* Full-screen Opening Animated Map Preloader (matches mrexpertsolution.com splash) */}
+      <MapIntroPreloader forceShow={true} onFinish={() => setShowPreloader(false)} />
 
       <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
         <Navbar />
@@ -52,7 +51,6 @@ export function App() {
         <Footer />
         <WhatsAppButton />
         <PromoPopup />
-        <LiveActivityToast />
       </div>
     </BrowserRouter>
   );
